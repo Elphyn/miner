@@ -1,20 +1,15 @@
 -- Main file
 -- Basic set up
 
--- Place diskDrive
-turtle.select(1)
-turtle.place()
 
--- Select disk
-turtle.select(2)
+-- Download software on the disk
 
--- Drop disk into diskDrive with startup.lua
-turtle.drop()
 
 -- Place first turtle and boot it up
 turtle.up()
 turtle.select(3)
 turtle.place()
+sleep(0.2)
 peripheral.call("front", "turnOn")
 
 -- Spawning turtles
@@ -25,6 +20,7 @@ while true do
     else
         turtle.select(3+count)
         turtle.place()
+        sleep(0.2)
         peripheral.call("front", "turnOn")
         count = count + 1
     end
