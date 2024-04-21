@@ -1,3 +1,5 @@
+-- Download file
+
 print("Enter Url of pastebin code: ")
 local code = io.read("*l")
 local url = string.format("https://pastebin.com/raw/%s", code)

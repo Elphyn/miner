@@ -11,10 +11,11 @@ turtle.select(2)
 -- Drop disk into diskDrive with startup.lua
 turtle.drop()
 
--- Place turtle and boot it up
+-- Place first turtle and boot it up
 turtle.up()
 turtle.select(3)
 turtle.place()
+peripheral.call("front", "turnOn")
 
 -- Spawning turtles
 local count = 1
@@ -24,12 +25,8 @@ while true do
     else
         turtle.select(3+count)
         turtle.place()
+        peripheral.call("front", "turnOn")
         count = count + 1
     end
 end
 
-
--- sleep(5)
--- turtle.forward()
--- shell.run("disk/startup")
--- -- 

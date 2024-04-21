@@ -1,32 +1,40 @@
---  Tunnel 
+-- Tunnel function 
 
 function checkBlock()
     while turtle.detect() do
-    turtle.dig()
-    end
-end 
-while true do
-    checkBlock()
-    turtle.forward()
-    turtle.digDown()
-    turtle.turnLeft()
-    checkBlock()
-    turtle.turnRight()
-    turtle.turnRight()
-    checkBlock() 
-    turtle.down()
-    checkBlock()
-    turtle.turnLeft()
-    turtle.turnLeft()
-    checkBlock()
-    turtle.up() 
-    turtle.digUp()
-    turtle.up()
-    checkBlock()
-    turtle.turnRight()
-    turtle.turnRight()
-    checkBlock()
-    turtle.down()
-    turtle.turnLeft()
-
+        turtle.dig()
+    end    
 end
+function forward()
+    while true do
+        checkBlock()
+        turtle.forward()
+        turtle.turnLeft()
+        checkBlock()
+    
+        turtle.turnRight()
+        turtle.turnRight()
+        checkBlock()
+
+        turtle.digUp()  --
+        turtle.up()
+        checkBlock()
+        turtle.turnLeft()
+        turtle.turnLeft()
+        checkBlock()
+        turtle.down()
+    
+        turtle.digDown()
+        turtle.down()
+        checkBlock()
+        turtle.turnLeft()
+        turtle.turnLeft()
+        checkBlock()
+        turtle.up()
+        turtle.turnLeft()
+    
+    
+    end 
+end
+forward()
+
