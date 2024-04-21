@@ -1,43 +1,70 @@
 -- Client
 
 
+-- Checks whether last 4 slots are empty or not
+function Check_space()
 
--- Drawer function
+    local count = 0
+    for i = 1, 16 do
+        if turtle.getItemDetail(i) then
+            count = count + 1
+        end
+    end
+    return 16 - count
+end
 
-function Drawer()
+
+function Drawer_and_refuel()
+
 
     local slots = {}
     local drawer_id = 1
+    
 
 
-    -- Mapping all cobbled_deepslate
+    -- Mapping all cobbled_deepslate and coal
     for slot = 2, 16 do
         local count = turtle.getItemDetail(slot)
         if turtle.getItemDetail(slot) then
             if (count.name == "minecraft:cobbled_deepslate") then
                 table.insert(slots, slot)
             end
+        
         end
     end
 
+    
     -- Deposit all cobbled_deepslate into a Drawer
     if #slots then
+        for i = 1, 2 do
+            turtle.turnLeft()
+        end
         turtle.select(drawer_id)
         turtle.place()
         for _, item in ipairs(slots) do
             turtle.select(item)
             turtle.drop()
         end
+        -- Turtle should return drawer to the first slot
         turtle.select(drawer_id)
         turtle.dig()
     end
+    
+    
     -- Turtle goes back to do it's thing
     for i = 1, 2 do
         turtle.turnLeft()
     end
 
-    -- Turtle should return drawer to first slot
+    
 end
+
+local space_left = Check_space()
+
+if (space_left < 5) then
+    Drawer_and_refuel()
+end
+
 
 -- Tunnel function 
 function Tunnel()
@@ -73,10 +100,14 @@ function Tunnel()
             checkBlock()
             turtle.up()
             turtle.turnLeft()
-        
+            local space = Check_space()
+            if (space < 5) then
+                Drawer_and_refuel()
+            end
         
         end 
     end
+    
     forward()
 end
 
@@ -118,7 +149,7 @@ local _, _, senderChannel, _, instruction, _ = os.pullEvent("modem_message")
 for i = 1, instruction do
     turtle.forward()
 end
-turtle.turnLeft()
+turtle.turnRight()
 turtle.forward()
 -- shell.run("proj/tunnel")
 Tunnel()

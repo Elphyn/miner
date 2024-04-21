@@ -3,11 +3,17 @@
 --  This file is a server that turtles connect to
 --  and are given insturctions 
 
+
+-- Deploys all turtles and turns them on
 local function Deploy()
+
+    --Spawning first turtle
     turtle.up()
     turtle.select(3)
     turtle.place()
+    turtle.select(4)
     sleep(0.2)
+    turtle.drop(1)
     peripheral.call("front", "turnOn")
 
     -- Spawning turtles
@@ -16,11 +22,14 @@ local function Deploy()
         if turtle.detect() then
             sleep(0.1)
         else
-            turtle.select(3+count)
+            turtle.select(4+count)
             turtle.place()
+            turtle.select(4)
             sleep(0.2)
+            turtle.drop(1)
             peripheral.call("front", "turnOn")
             count = count + 1
+            sleep(1)
         end
     end
 
@@ -29,7 +38,7 @@ end
 
 local function Server()
 
-    SLOTS = 6
+    SLOTS = 10
     DEFAULT_CLIENT_PORT = 100
     SERVER_PORT = 10
 
